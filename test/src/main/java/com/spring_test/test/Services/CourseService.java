@@ -7,9 +7,11 @@ import com.spring_test.test.Entities.Dtos.CourseDto;
 import com.spring_test.test.Entities.Dtos.GetDtos.CourseGetDto;
 import com.spring_test.test.Entities.Professor;
 import com.spring_test.test.Entities.University;
+import com.spring_test.test.Entities.User;
 import com.spring_test.test.Repositories.CourseRepository;
 import com.spring_test.test.Repositories.ProfessorRepository;
 import com.spring_test.test.Repositories.UniversityRepository;
+import com.spring_test.test.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,11 +23,13 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final UniversityRepository universityRepository;
     private final ProfessorRepository professorRepository;
+    private final UserRepository userRepository;
 
-    public CourseService(CourseRepository courseRepository, UniversityRepository universityRepository, ProfessorRepository professorRepository){
+    public CourseService(CourseRepository courseRepository, UniversityRepository universityRepository, ProfessorRepository professorRepository, UserRepository userRepository){
         this.courseRepository = courseRepository;
         this.universityRepository = universityRepository;
         this.professorRepository = professorRepository;
+        this.userRepository = userRepository;
     }
 
     public CourseGetDto get(final Integer id){
@@ -66,6 +70,14 @@ public class CourseService {
     }
 
     public CourseGetDto addProfessor(final Integer courseId, final Integer professorId){
+        if(courseId == 0){
+            throw new BadRequestException("course id must not be empty");
+        }
+
+        if(professorId == 0){
+            throw new BadRequestException("professor id must not be empty");
+        }
+
         Course course = courseRepository.findById(courseId).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", courseId));
         Professor professor = professorRepository.findById(professorId).orElseThrow(() -> new ResourceNotFoundException("Professor", "Id", professorId));
 
@@ -74,6 +86,28 @@ public class CourseService {
         }
 
         course.getProfessors().add(professor);
+        courseRepository.save(course);
+
+        return new CourseGetDto(course);
+    }
+
+    public CourseGetDto addUser(final Integer courseId, final Integer userId){
+        if(courseId == 0){
+            throw new BadRequestException("course id must not be empty");
+        }
+
+        if(userId == 0){
+            throw new BadRequestException("professor id must not be empty");
+        }
+
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", courseId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+
+        if(course.getUsers().contains(user)){
+            throw new BadRequestException("user already in course");
+        }
+
+        course.getUsers().add(user);
         courseRepository.save(course);
 
         return new CourseGetDto(course);
@@ -94,7 +128,54 @@ public class CourseService {
         return new CourseGetDto(course);
     }
 
+    public void removeProfessor(final Integer courseId, final Integer professorId){
+        if(courseId == 0){
+            throw new BadRequestException("course id must not be empty");
+        }
+
+        if(professorId == 0){
+            throw new BadRequestException("professor id must not be empty");
+        }
+
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", courseId));
+        Professor professor = professorRepository.findById(professorId).orElseThrow(() -> new ResourceNotFoundException("Professor", "Id", professorId));
+
+        if(!course.getProfessors().contains(professor)){
+            throw new BadRequestException("professor not in course");
+        }
+
+        if(course.getProfessors().size() == 1){
+            throw new BadRequestException("course must contain a professor");
+        }
+
+        course.getProfessors().remove(professor);
+        courseRepository.save(course);
+    }
+
+    public void removeUser(final Integer courseId, final Integer userId){
+        if(courseId == 0){
+            throw new BadRequestException("course id must not be empty");
+        }
+
+        if(userId == 0){
+            throw new BadRequestException("professor id must not be empty");
+        }
+
+        Course course = courseRepository.findById(courseId).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", courseId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+
+        if(!course.getUsers().contains(user)){
+            throw new BadRequestException("user not in course");
+        }
+
+        course.getUsers().remove(user);
+        courseRepository.save(course);
+    }
+
     public void delete(final Integer id){
+        if(id == 0){
+            throw new BadRequestException("id must not be empty");
+        }
         Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", id));
         courseRepository.delete(course);
     }

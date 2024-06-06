@@ -61,6 +61,9 @@ public class UniversityService {
     }
 
     public void delete(final Integer id){
+        if(id == 0){
+            throw new BadRequestException("id must not be empty");
+        }
         University university = universityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("University", "Id", id));
         universityRepository.delete(university);
     }

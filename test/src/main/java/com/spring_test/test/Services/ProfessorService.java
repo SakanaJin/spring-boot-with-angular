@@ -60,7 +60,20 @@ public class ProfessorService {
     }
 
     public void delete(final Integer id){
+        if(id == 0){
+            throw new BadRequestException("id must not be empty");
+        }
         Professor professor = professorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Professor", "Id", id));
+
+        professor.getCourses().forEach(x -> {
+            if(x.getProfessors().size() == 1){
+                throw new BadRequestException("course " + x.getName() + " still reliant on professor");
+            }
+            else{
+                x.getProfessors().remove(professor);
+            }
+        });
+
         professorRepository.delete(professor);
     }
 }
