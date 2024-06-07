@@ -1,43 +1,55 @@
 {
-  "hash": "bb7568f3",
-  "configHash": "97572cb6",
-  "lockfileHash": "50ae2702",
-  "browserHash": "107de4d0",
+  "hash": "d92e7e4a",
+  "configHash": "8ab2ca65",
+  "lockfileHash": "6597126e",
+  "browserHash": "475999c3",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "e6f2b544",
+      "fileHash": "486af5e8",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "49bdf273",
+      "fileHash": "3348952d",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "cb311612",
+      "fileHash": "6f03c1ef",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "810f7f45",
+      "fileHash": "be54fe9c",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "8ff00636",
+      "fileHash": "428b4899",
+      "needsInterop": false
+    },
+    "primeng/api": {
+      "src": "../../../../../node_modules/primeng/fesm2022/primeng-api.mjs",
+      "file": "primeng_api.js",
+      "fileHash": "7d7d85cf",
+      "needsInterop": false
+    },
+    "primeng/card": {
+      "src": "../../../../../node_modules/primeng/fesm2022/primeng-card.mjs",
+      "file": "primeng_card.js",
+      "fileHash": "e3b739f2",
       "needsInterop": false
     },
     "rxjs": {
       "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
       "file": "rxjs.js",
-      "fileHash": "fc01bf4c",
+      "fileHash": "653d8689",
       "needsInterop": false
     }
   },
@@ -47,6 +59,9 @@
     },
     "chunk-W5UAKTVW": {
       "file": "chunk-W5UAKTVW.js"
+    },
+    "chunk-HAMRO4RI": {
+      "file": "chunk-HAMRO4RI.js"
     },
     "chunk-RE2CMITL": {
       "file": "chunk-RE2CMITL.js"

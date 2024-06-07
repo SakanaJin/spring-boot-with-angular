@@ -13,7 +13,7 @@ export class ApiService {
 
   getCourses() {
     return this.http
-      .get<CourseGetDto>(this.baseUrl + `/api/courses`)
+      .get<CourseGetDto[]>(this.baseUrl + `/api/courses`)
       .pipe(catchError(this.handleError));
   }
 

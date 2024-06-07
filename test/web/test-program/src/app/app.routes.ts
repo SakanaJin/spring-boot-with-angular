@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { LandingComponent } from './landing/landing.component';
+import { CourseListingComponent } from './course-listing/course-listing.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'header', component: HeaderComponent },
+  { path: 'courses', component: CourseListingComponent },
 ];
