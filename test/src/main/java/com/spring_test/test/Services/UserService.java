@@ -2,7 +2,6 @@ package com.spring_test.test.Services;
 
 import com.spring_test.test.Controllers.Exceptions.BadRequestException;
 import com.spring_test.test.Controllers.Exceptions.ResourceNotFoundException;
-import com.spring_test.test.Entities.Dtos.GetDtos.UserGetDto;
 import com.spring_test.test.Entities.Dtos.UserDto;
 import com.spring_test.test.Entities.User;
 import com.spring_test.test.Repositories.UserRepository;
@@ -20,16 +19,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<UserGetDto> getAll(){
-        return userRepository.findAll().stream().map(UserGetDto::new).toList();
+    public List<User> getAll(){
+        return userRepository.findAll();
     }
 
-    public UserGetDto get(final Integer id){
-        User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
-        return new UserGetDto(user);
+    public User get(final Integer id){
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "Id", id));
     }
 
-    public UserGetDto create(UserDto userDto){
+    public User create(UserDto userDto){
         if(userDto.getUserName().isEmpty()){
             throw new BadRequestException("username must not be empty");
         }
@@ -70,12 +68,10 @@ public class UserService {
                 .Courses(new ArrayList<>())
                 .build();
 
-        userRepository.save(user);
-
-        return new UserGetDto(user);
+        return userRepository.save(user);
     }
 
-    public UserGetDto update(UserDto userDto, final Integer id){
+    public User update(UserDto userDto, final Integer id){
         if(id == 0){
             throw new BadRequestException("id must not be empty");
         }
@@ -119,9 +115,7 @@ public class UserService {
         user.setLastName(userDto.getLastName());
         user.setEmail(userDto.getEmail());
 
-        userRepository.save(user);
-
-        return new UserGetDto(user);
+        return userRepository.save(user);
     }
 
     public void delete(final Integer id){

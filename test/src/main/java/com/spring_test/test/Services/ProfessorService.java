@@ -3,7 +3,6 @@ package com.spring_test.test.Services;
 import com.spring_test.test.Controllers.Exceptions.BadRequestException;
 import com.spring_test.test.Controllers.Exceptions.ResourceNotFoundException;
 import com.spring_test.test.Entities.Course;
-import com.spring_test.test.Entities.Dtos.GetDtos.ProfessorGetDto;
 import com.spring_test.test.Entities.Dtos.ProfessorDto;
 import com.spring_test.test.Entities.Professor;
 import org.springframework.stereotype.Service;
@@ -21,16 +20,15 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    public List<ProfessorGetDto> getAll(){
-        return professorRepository.findAll().stream().map(ProfessorGetDto::new).toList();
+    public List<Professor> getAll(){
+        return professorRepository.findAll();
     }
 
-    public ProfessorGetDto get(final Integer id){
-        Professor professor = professorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Professor", "Id", id));
-        return new ProfessorGetDto(professor);
+    public Professor get(final Integer id){
+        return professorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Professor", "Id", id));
     }
 
-    public ProfessorGetDto create(ProfessorDto professorDto){
+    public Professor create(ProfessorDto professorDto){
         if(professorDto.getName().isEmpty()){
             throw new BadRequestException("name must not be empty");
         }
@@ -40,12 +38,10 @@ public class ProfessorService {
                 .Courses(new ArrayList<Course>())
                 .build();
 
-        professorRepository.save(professor);
-
-        return new ProfessorGetDto(professor);
+        return professorRepository.save(professor);
     }
 
-    public ProfessorGetDto update(ProfessorDto professorDto, final Integer id){
+    public Professor update(ProfessorDto professorDto, final Integer id){
         if(professorDto.getName().isEmpty()){
             throw new BadRequestException("name must not be empty");
         }
@@ -54,9 +50,7 @@ public class ProfessorService {
 
         professor.setName(professorDto.getName());
 
-        professorRepository.save(professor);
-
-        return new ProfessorGetDto(professor);
+        return professorRepository.save(professor);
     }
 
     public void delete(final Integer id){

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { CourseGetDto } from '../constants/types';
+import { CourseGetDto, UniversityGetDto } from '../constants/types';
 import { ApiService } from '../service/api.service';
 import { NgFor, NgIf } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -16,8 +16,12 @@ export class HeaderComponent {
   constructor(private api: ApiService) {}
 
   course: CourseGetDto | undefined;
+  university: UniversityGetDto | undefined;
 
   acquire() {
     this.api.getCourse(1).subscribe((data) => (this.course = { ...data }));
+    this.api
+      .getUniversity(1)
+      .subscribe((data) => (this.university = { ...data }));
   }
 }

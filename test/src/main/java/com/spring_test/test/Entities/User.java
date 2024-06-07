@@ -1,6 +1,9 @@
 package com.spring_test.test.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -25,5 +28,6 @@ public class User {
     private String LastName;
     private String Email;
     @ManyToMany(mappedBy = "Users")
+    @JsonIgnoreProperties("users")
     private List<Course> Courses;
 }

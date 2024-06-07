@@ -4,7 +4,6 @@ import com.spring_test.test.Controllers.Exceptions.ResourceNotFoundException;
 import com.spring_test.test.Controllers.Exceptions.BadRequestException;
 import com.spring_test.test.Entities.Course;
 import com.spring_test.test.Entities.Dtos.CourseDto;
-import com.spring_test.test.Entities.Dtos.GetDtos.CourseGetDto;
 import com.spring_test.test.Entities.Professor;
 import com.spring_test.test.Entities.University;
 import com.spring_test.test.Entities.User;
@@ -32,16 +31,14 @@ public class CourseService {
         this.userRepository = userRepository;
     }
 
-    public CourseGetDto get(final Integer id){
-        Course course = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", id));
-        return new CourseGetDto(course);
+    public Course get(final Integer id){
+        return courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Course", "Id", id));
+    }
+    public List<Course> getAll(){
+        return courseRepository.findAll();
     }
 
-    public List<CourseGetDto> getAll(){
-        return courseRepository.findAll().stream().map(CourseGetDto::new).toList();
-    }
-
-    public CourseGetDto create(CourseDto courseDto, final Integer universityId, final Integer professorId){
+    public Course create(CourseDto courseDto, final Integer universityId, final Integer professorId){
         if(professorId == 0){
             throw new BadRequestException("must have a professor");
         }
@@ -64,12 +61,10 @@ public class CourseService {
         course.getProfessors().add(professor);
         course.setCreatedAt(LocalDateTime.now());
         course.setLastModifiedAt(LocalDateTime.now());
-        courseRepository.save(course);
-
-        return new CourseGetDto(course);
+        return courseRepository.save(course);
     }
 
-    public CourseGetDto addProfessor(final Integer courseId, final Integer professorId){
+    public Course addProfessor(final Integer courseId, final Integer professorId){
         if(courseId == 0){
             throw new BadRequestException("course id must not be empty");
         }
@@ -86,12 +81,10 @@ public class CourseService {
         }
 
         course.getProfessors().add(professor);
-        courseRepository.save(course);
-
-        return new CourseGetDto(course);
+        return courseRepository.save(course);
     }
 
-    public CourseGetDto addUser(final Integer courseId, final Integer userId){
+    public Course addUser(final Integer courseId, final Integer userId){
         if(courseId == 0){
             throw new BadRequestException("course id must not be empty");
         }
@@ -108,12 +101,10 @@ public class CourseService {
         }
 
         course.getUsers().add(user);
-        courseRepository.save(course);
-
-        return new CourseGetDto(course);
+        return courseRepository.save(course);
     }
 
-    public CourseGetDto update(CourseDto courseDto, final Integer id){
+    public Course update(CourseDto courseDto, final Integer id){
         if(courseDto.getName().isEmpty()){
             throw new BadRequestException("name must not be empty");
         }
@@ -123,9 +114,7 @@ public class CourseService {
         course.setName(courseDto.getName());
         course.setDescription(courseDto.getDescription());
 
-        courseRepository.save(course);
-
-        return new CourseGetDto(course);
+        return courseRepository.save(course);
     }
 
     public void removeProfessor(final Integer courseId, final Integer professorId){

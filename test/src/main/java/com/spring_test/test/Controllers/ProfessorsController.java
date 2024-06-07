@@ -1,6 +1,5 @@
 package com.spring_test.test.Controllers;
 
-import com.spring_test.test.Entities.Dtos.GetDtos.ProfessorGetDto;
 import com.spring_test.test.Entities.Dtos.ProfessorDto;
 import com.spring_test.test.Entities.Professor;
 import com.spring_test.test.Services.ProfessorService;
@@ -21,23 +20,23 @@ public class ProfessorsController {
     }
 
     @GetMapping
-    public List<ProfessorGetDto> getAll(){
+    public List<Professor> getAll(){
         return professorService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ProfessorGetDto get(@PathVariable final Integer id){
+    public Professor get(@PathVariable final Integer id){
         return professorService.get(id);
     }
 
     @PostMapping
-    public ResponseEntity<ProfessorGetDto> create(@RequestBody ProfessorDto professorDto){
-        return new ResponseEntity<ProfessorGetDto>(professorService.create(professorDto), HttpStatus.CREATED);
+    public ResponseEntity<Professor> create(@RequestBody ProfessorDto professorDto){
+        return new ResponseEntity<Professor>(professorService.create(professorDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorGetDto> update(@RequestBody ProfessorDto professorDto, @PathVariable final Integer id){
-        return new ResponseEntity<ProfessorGetDto>(professorService.update(professorDto, id), HttpStatus.OK);
+    public ResponseEntity<Professor> update(@RequestBody ProfessorDto professorDto, @PathVariable final Integer id){
+        return new ResponseEntity<Professor>(professorService.update(professorDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

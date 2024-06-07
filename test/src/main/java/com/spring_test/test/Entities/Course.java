@@ -1,11 +1,11 @@
 package com.spring_test.test.Entities;
 
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
-
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,6 +30,7 @@ public class Course extends BaseEntity{
             @JoinColumn(name = "ProfessorId")
         }
     )
+    @JsonIgnoreProperties("courses")
     private List<Professor> Professors;
     @ManyToMany
     @JoinTable(
@@ -41,9 +42,11 @@ public class Course extends BaseEntity{
             @JoinColumn(name = "UserId")
         }
     )
+    @JsonIgnoreProperties("courses")
     private List<User> Users;
     @ManyToOne
     @JoinColumn(name="UniversityId")
+    @JsonIgnoreProperties("courses")
     private University university;
 }
 

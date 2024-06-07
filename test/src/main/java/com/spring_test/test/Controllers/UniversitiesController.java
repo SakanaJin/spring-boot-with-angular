@@ -1,6 +1,5 @@
 package com.spring_test.test.Controllers;
 
-import com.spring_test.test.Entities.Dtos.GetDtos.UniversityGetDto;
 import com.spring_test.test.Entities.Dtos.UniversityDto;
 import com.spring_test.test.Entities.University;
 import com.spring_test.test.Services.UniversityService;
@@ -20,23 +19,23 @@ public class UniversitiesController {
     }
 
     @GetMapping
-    public List<UniversityGetDto> getAll(){
+    public List<University> getAll(){
         return universityService.getAll();
     }
 
     @GetMapping("/{id}")
-    public UniversityGetDto get(final Integer id){
+    public University get(@PathVariable final Integer id){
         return universityService.get(id);
     }
 
     @PostMapping
-    public ResponseEntity<UniversityGetDto> create(@RequestBody UniversityDto universityDto){
-        return new ResponseEntity<UniversityGetDto>(universityService.create(universityDto), HttpStatus.CREATED);
+    public ResponseEntity<University> create(@RequestBody UniversityDto universityDto){
+        return new ResponseEntity<University>(universityService.create(universityDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UniversityGetDto> update(@RequestBody UniversityDto universityDto, @PathVariable final Integer id){
-        return new ResponseEntity<UniversityGetDto>(universityService.update(universityDto, id), HttpStatus.OK);
+    public ResponseEntity<University> update(@RequestBody UniversityDto universityDto, @PathVariable final Integer id){
+        return new ResponseEntity<University>(universityService.update(universityDto, id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
