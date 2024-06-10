@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  NgModel,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
@@ -10,14 +17,29 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-university-create',
   standalone: true,
-  imports: [InputTextModule, DividerModule, FormsModule, ButtonModule],
+  imports: [
+    InputTextModule,
+    DividerModule,
+    FormsModule,
+    ButtonModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './university-create.component.html',
   styleUrl: './university-create.component.css',
 })
 export class UniversityCreateComponent {
-  constructor(private api: ApiService, private router: Router) {}
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.form = formBuilder.group({
+      Name: ['', Validators.required],
+    });
+  }
 
   response: UniversityGetDto | undefined;
+  form: FormGroup;
   name: string = NgModel.name;
   university: UniversityDto = {
     name: '',
@@ -27,7 +49,13 @@ export class UniversityCreateComponent {
     this.api
       .postUniversity(this.university)
       .subscribe((data) => (this.response = { ...data }));
+    if (this.response != undefined) {
+      this.router.navigate([`/find/universities`]);
+    } else {
+    }
+  }
 
-    this.router.navigate([`/find/universities`]);
+  onCancel() {
+    this.router.navigate(['/find/universities']);
   }
 }

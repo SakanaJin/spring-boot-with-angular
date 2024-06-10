@@ -16,10 +16,10 @@
             type="text"
             pInputText
             [(ngModel)]="university.name"
-            name="Name"
-            required
+            formControlName="Name"
           />
         </div>
+
         <div class="col" style="display: flex; justify-content: space-between">
           <button pButton pRipple type="submit" label="Submit"></button>
           <button
@@ -28,7 +28,7 @@
             type="button"
             label="Cancel"
             class="p-button-outlined p-button-danger"
-            color="red"
+            (click)="onCancel()"
           ></button>
         </div>
       </form>
