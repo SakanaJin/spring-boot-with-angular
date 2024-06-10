@@ -59,8 +59,6 @@ public class CourseService {
                 .build();
 
         course.getProfessors().add(professor);
-        course.setCreatedAt(LocalDateTime.now());
-        course.setLastModifiedAt(LocalDateTime.now());
         return courseRepository.save(course);
     }
 

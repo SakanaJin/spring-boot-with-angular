@@ -3,18 +3,16 @@ package com.spring_test.test.Entities;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "courses")
 @Entity
-public class Course extends BaseEntity{
+public class Course{
     @jakarta.persistence.Id
     @GeneratedValue
     private Integer Id;

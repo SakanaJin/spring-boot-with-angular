@@ -1,9 +1,18 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { LandingComponent } from './landing/landing.component';
+import { CourseListingComponent } from './course-listing/course-listing.component';
+import { CourseComponent } from './course/course.component';
+import { CourseCreateComponent } from './course-create/course-create.component';
+import { FindCoursesComponent } from './find-courses/find-courses.component';
+import { UniversityComponent } from './university/university.component';
+import { UniversityCreateComponent } from './university-create/university-create.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'header', component: HeaderComponent },
+  { path: 'courses', component: CourseListingComponent },
+  { path: 'course/:id', component: CourseComponent },
+  { path: 'courses/create', component: CourseCreateComponent },
+  { path: 'find/universities', component: FindCoursesComponent },
+  { path: 'university/create', component: UniversityCreateComponent },
+  { path: 'university/:id', component: UniversityComponent },
 ];
