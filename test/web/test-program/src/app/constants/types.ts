@@ -63,3 +63,7 @@ export type UniversityCoursesGetDto = {
   professors: CourseProfessorsGetDto[];
   users: CourseUsersGetDto[];
 };
+
+export type UniversityDto = {
+  name: string;
+};

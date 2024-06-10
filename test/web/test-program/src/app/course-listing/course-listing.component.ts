@@ -5,11 +5,13 @@ import { CourseGetDto } from '../constants/types';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { DividerModule } from 'primeng/divider';
 
 @Component({
   selector: 'app-course-listing',
   standalone: true,
-  imports: [CardModule, NgFor, AsyncPipe],
+  imports: [CardModule, NgFor, AsyncPipe, ButtonModule, DividerModule],
   templateUrl: './course-listing.component.html',
   styleUrl: './course-listing.component.css',
 })
@@ -22,7 +24,11 @@ export class CourseListingComponent implements OnInit {
     this.courses = this.api.getCourses();
   }
 
-  click() {
-    this.router.navigate(['/']);
+  toCourse(id: number) {
+    this.router.navigate([`/course/${id}`]);
+  }
+
+  toCourseCreate() {
+    this.router.navigate([`/courses/create`]);
   }
 }

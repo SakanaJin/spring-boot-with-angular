@@ -1,18 +1,20 @@
 <div style="display: flex; justify-content: space-between; align-items: center">
-  <h2>Courses</h2>
+  <h1>Universities</h1>
   <p-button
     label="Create"
     icon="pi pi-plus"
     iconPos="right"
-    (onClick)="toCourseCreate()"
+    (onClick)="toUniversityCreate()"
   ></p-button>
 </div>
 <div class="container-fluid">
   <p-divider></p-divider>
   <div class="row" style="display: flex; justify-content: center">
-    <div class="col-3" *ngFor="let course of courses | async">
-      <p-card header="{{ course.name }}" (click)="toCourse(course.id)">
-        {{ course.description }}
+    <div class="col-4" *ngFor="let university of universities | async">
+      <p-card (click)="toUniversity(university.id)">
+        <h2 style="display: flex; justify-content: center">
+          {{ university.name }}
+        </h2>
       </p-card>
     </div>
   </div>

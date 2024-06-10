@@ -1,6 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CourseGetDto, UniversityGetDto } from '../constants/types';
+import {
+  CourseGetDto,
+  UniversityDto,
+  UniversityGetDto,
+} from '../constants/types';
 import { catchError, throwError } from 'rxjs';
 
 @Injectable({
@@ -26,6 +30,18 @@ export class ApiService {
   getUniversity(id: number) {
     return this.http
       .get<UniversityGetDto>(this.baseUrl + `/api/universities/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  getUniversities() {
+    return this.http
+      .get<UniversityGetDto[]>(this.baseUrl + `/api/universities`)
+      .pipe(catchError(this.handleError));
+  }
+
+  postUniversity(university: UniversityDto) {
+    return this.http
+      .post<UniversityGetDto>(this.baseUrl + `/api/universities`, university)
       .pipe(catchError(this.handleError));
   }
 

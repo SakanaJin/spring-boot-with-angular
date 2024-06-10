@@ -39,7 +39,7 @@ public class TestApplication {
 					.Courses(new ArrayList<>())
 					.build();
 			var university1 = University.builder()
-					.Name("SELU")
+					.Name("Southeastern Louisiana University")
 					.Courses(new ArrayList<>())
 					.build();
 			var course1 = Course.builder()
