@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  NgModel,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { ApiService } from '../service/api.service';
-import { UniversityDto, UniversityGetDto } from '../constants/types';
+import { UniversityDto } from '../constants/types';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-university-create',
@@ -23,36 +18,40 @@ import { Router } from '@angular/router';
     FormsModule,
     ButtonModule,
     ReactiveFormsModule,
+    ToastModule,
   ],
   templateUrl: './university-create.component.html',
   styleUrl: './university-create.component.css',
+  providers: [MessageService],
 })
 export class UniversityCreateComponent {
   constructor(
     private api: ApiService,
     private router: Router,
-    private formBuilder: FormBuilder
-  ) {
-    this.form = formBuilder.group({
-      Name: ['', Validators.required],
-    });
-  }
+    private messageService: MessageService
+  ) {}
 
-  response: UniversityGetDto | undefined;
-  form: FormGroup;
   name: string = NgModel.name;
   university: UniversityDto = {
     name: '',
   };
 
   onSubmit() {
-    this.api
-      .postUniversity(this.university)
-      .subscribe((data) => (this.response = { ...data }));
-    if (this.response != undefined) {
-      this.router.navigate([`/find/universities`]);
-    } else {
-    }
+    this.api.postUniversity(this.university).subscribe((data) => {
+      this.messageService.add({
+        key: 'toast',
+        severity: 'success',
+        summary: 'Success',
+        detail: 'University created',
+        life: 1000,
+      });
+      //this.router.navigate(['/find/universities']);
+    });
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Error creating University',
+    });
   }
 
   onCancel() {
