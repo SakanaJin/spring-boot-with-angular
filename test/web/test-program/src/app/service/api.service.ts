@@ -6,43 +6,92 @@ import {
   UniversityGetDto,
 } from '../constants/types';
 import { catchError, throwError } from 'rxjs';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toast: ToastService) {}
 
   baseUrl: string = 'http://localhost:8080';
 
   getCourses() {
-    return this.http
-      .get<CourseGetDto[]>(this.baseUrl + `/api/courses`)
-      .pipe(catchError(this.handleError));
+    return this.http.get<CourseGetDto[]>(this.baseUrl + `/api/courses`).pipe(
+      catchError((error) => {
+        this.toast.showToast('error', 'Error', 'Error getting Courses');
+        return this.handleError(error);
+      })
+    );
   }
 
   getCourse(id: number) {
     return this.http
       .get<CourseGetDto>(this.baseUrl + `/api/courses/${id}`)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error getting Course');
+          return this.handleError(error);
+        })
+      );
   }
 
   getUniversity(id: number) {
     return this.http
       .get<UniversityGetDto>(this.baseUrl + `/api/universities/${id}`)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error getting University');
+          return this.handleError(error);
+        })
+      );
   }
 
   getUniversities() {
     return this.http
       .get<UniversityGetDto[]>(this.baseUrl + `/api/universities`)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error fetching Universities');
+          return this.handleError(error);
+        })
+      );
   }
 
   postUniversity(university: UniversityDto) {
     return this.http
       .post<UniversityGetDto>(this.baseUrl + `/api/universities`, university)
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error creating University');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  putUniversity(university: UniversityDto, id: number) {
+    return this.http
+      .put<UniversityGetDto>(
+        this.baseUrl + `/api/universities/${id}`,
+        university
+      )
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error updating University');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  deleteUniversity(id: number) {
+    return this.http
+      .delete<UniversityGetDto>(this.baseUrl + `/api/universities/${id}`)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error deleting University');
+          return this.handleError(error);
+        })
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
