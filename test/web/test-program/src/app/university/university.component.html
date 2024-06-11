@@ -1,1 +1,51 @@
-<p>university works!</p>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>
+<div style="display: flex; align-items: center; justify-content: space-between">
+  <h1>{{ university?.name }}</h1>
+  <button
+    pButton
+    pRipple
+    icon="pi pi-plus"
+    iconPos="right"
+    type="button"
+    label="Create"
+    (click)="toCourseCreate()"
+  ></button>
+</div>
+<div class="container-fluid">
+  <p-divider></p-divider>
+  <div class="row" style="display: flex; justify-content: center">
+    <div class="col-2" *ngFor="let course of university?.courses">
+      <p-card>
+        <ng-template pTemplate="header"
+          ><h2 style="display: flex; justify-content: center">
+            {{ course.name }}
+          </h2></ng-template
+        >
+        <p style="display: flex; justify-content: center">
+          {{ course.description }} <br />
+          {{ course.professors[0].name }}
+        </p>
+        <ng-template pTemplate="footer">
+          <button
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-text p-button-danger"
+            (click)="confirm(course.id)"
+          ></button>
+        </ng-template>
+      </p-card>
+    </div>
+    <div
+      *ngIf="university?.courses?.length === 0"
+      style="display: flex; justify-content: center"
+    >
+      <h2>No Courses</h2>
+    </div>
+  </div>
+</div>

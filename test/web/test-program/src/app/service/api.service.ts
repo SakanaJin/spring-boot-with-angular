@@ -36,6 +36,17 @@ export class ApiService {
       );
   }
 
+  deleteCourse(id: number) {
+    return this.http
+      .delete<CourseGetDto>(this.baseUrl + `/api/courses/${id}`)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error deleting Course');
+          return this.handleError(error);
+        })
+      );
+  }
+
   getUniversity(id: number) {
     return this.http
       .get<UniversityGetDto>(this.baseUrl + `/api/universities/${id}`)

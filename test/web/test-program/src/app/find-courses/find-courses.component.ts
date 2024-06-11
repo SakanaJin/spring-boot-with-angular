@@ -40,8 +40,6 @@ export class FindCoursesComponent implements OnInit {
     this.universities = this.api.getUniversities();
   }
 
-  toEdit(id: number) {}
-
   toUniversity(id: number) {
     this.router.navigate([`/university/${id}`]);
   }
