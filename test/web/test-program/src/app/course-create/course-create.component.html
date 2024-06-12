@@ -1,1 +1,63 @@
-<p>course-create works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 style="display: flex; justify-content: center">Create Course</h1>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <div style="display: flex; justify-content: center">
+    <div class="row">
+      <form (submit)="onSubmit()">
+        <div class="col">
+          <label>Name</label>
+        </div>
+        <div class="col-3">
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="course.name"
+            name="Name"
+            style="width: 14rem"
+          />
+        </div>
+        <div class="col">
+          <label>Description</label>
+        </div>
+        <div class="col-3">
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="course.description"
+            name="Description"
+            style="width: 14rem"
+          />
+        </div>
+        <div class="col">
+          <label>Professor</label>
+        </div>
+        <div class="col">
+          <p-dropdown
+            [options]="(professors | async)!"
+            [(ngModel)]="selectedProfessorId"
+            optionLabel="name"
+            optionValue="id"
+            filter="true"
+            placeholder="Select a Professor"
+            name="boxdropperboxerdrop"
+          ></p-dropdown>
+        </div>
+        <div class="col" style="display: flex; justify-content: space-between">
+          <button pButton pRipple type="submit" label="Submit"></button>
+          <button
+            pButton
+            pRipple
+            type="button"
+            label="Cancel"
+            class="p-button-outlined p-button-danger"
+            (click)="onCancel()"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

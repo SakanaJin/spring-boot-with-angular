@@ -21,14 +21,19 @@
     <div class="col-2" *ngFor="let course of university?.courses">
       <p-card>
         <ng-template pTemplate="header"
-          ><h2 style="display: flex; justify-content: center">
+          ><h2
+            style="display: flex; justify-content: center; cursor: pointer"
+            (click)="toCourse(course.id)"
+          >
             {{ course.name }}
           </h2></ng-template
         >
-        <p style="display: flex; justify-content: center">
-          {{ course.description }} <br />
-          {{ course.professors[0].name }}
-        </p>
+        <div style="cursor: pointer" (click)="toCourse(course.id)">
+          <p style="display: flex; justify-content: center">
+            {{ course.description }} <br />
+            {{ course.professors[0].name }}
+          </p>
+        </div>
         <ng-template pTemplate="footer">
           <button
             pButton

@@ -1,7 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  CourseDto,
   CourseGetDto,
+  ProfessorGetDto,
   UniversityDto,
   UniversityGetDto,
 } from '../constants/types';
@@ -31,6 +33,59 @@ export class ApiService {
       .pipe(
         catchError((error) => {
           this.toast.showToast('error', 'Error', 'Error getting Course');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  postCourse(course: CourseDto, universityId: number, professorId: number) {
+    return this.http
+      .post<CourseGetDto>(
+        this.baseUrl +
+          `/api/courses/university/${universityId}/professor/${professorId}`,
+        course
+      )
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error creating Course');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  addProfessor(course: CourseDto, courseId: number, professorId: number) {
+    return this.http
+      .post<CourseGetDto>(
+        this.baseUrl + `/api/courses/${courseId}/professor/${professorId}`,
+        course
+      )
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error adding Professor');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  putCourse(course: CourseDto, id: number) {
+    return this.http
+      .put<CourseGetDto>(this.baseUrl + `/api/courses/${id}`, course)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error updating Course');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  removeProfessor(courseId: number, professorId: number) {
+    return this.http
+      .delete<CourseGetDto>(
+        this.baseUrl + `/api/courses/${courseId}/professor/${professorId}`
+      )
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error removing Professor');
           return this.handleError(error);
         })
       );
@@ -105,8 +160,19 @@ export class ApiService {
       );
   }
 
+  getProfessors() {
+    return this.http
+      .get<ProfessorGetDto[]>(this.baseUrl + `/api/professors`)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error fetching Professors');
+          return this.handleError(error);
+        })
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
-    console.log('an error ocurred', error.message); //change later
-    return throwError(() => new Error(error.message)); //
+    console.log('an error ocurred', error.message);
+    return throwError(() => new Error(error.message));
   }
 }

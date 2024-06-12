@@ -67,3 +67,12 @@ export type UniversityCoursesGetDto = {
 export type UniversityDto = {
   name: string;
 };
+
+export type CourseDto = {
+  name: string;
+  description: string;
+};
+
+export type ProfessorDto = {
+  name: string;
+};

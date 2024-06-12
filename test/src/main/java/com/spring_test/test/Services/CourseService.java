@@ -78,6 +78,10 @@ public class CourseService {
             throw new BadRequestException("Professor already in course");
         }
 
+        if(course.getProfessors().size() == 3){
+            throw new BadRequestException("Professor limit reached");
+        }
+
         course.getProfessors().add(professor);
         return courseRepository.save(course);
     }

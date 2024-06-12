@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { UniversityGetDto } from '../constants/types';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { NgFor, NgIf } from '@angular/common';
@@ -31,7 +31,8 @@ export class UniversityComponent implements OnInit {
     private api: ApiService,
     private route: ActivatedRoute,
     private confimationService: ConfirmationService,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
   ) {}
 
   university: UniversityGetDto | undefined;
@@ -42,7 +43,13 @@ export class UniversityComponent implements OnInit {
       .subscribe((data) => (this.university = { ...data }));
   }
 
-  toCourseCreate() {}
+  toCourseCreate() {
+    this.router.navigate([`/university/${this.university?.id}/course/create`]);
+  }
+
+  toCourse(id: number) {
+    this.router.navigate([`course/${id}`]);
+  }
 
   confirm(id: number) {
     this.confimationService.confirm({

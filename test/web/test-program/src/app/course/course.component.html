@@ -1,3 +1,31 @@
-<div class="box">
-  <h2>{{ course?.name }}</h2>
+<div style="display: flex; justify-content: space-between; align-items: center">
+  <div>
+    <div>
+      <h1>{{ course?.name }}</h1>
+    </div>
+    <div>
+      <h3 *ngFor="let professor of course?.professors | slice : 0 : 1">
+        {{ professor.name }}
+      </h3>
+    </div>
+  </div>
+  <div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-pencil"
+      iconPos="right"
+      label="Edit"
+      (click)="toCourseEdit()"
+    ></button>
+  </div>
+</div>
+<p-divider></p-divider>
+<div style="display: flex; justify-content: center">
+  <p>
+    {{ course?.description }} <br />
+    <br />
+    Tests and stuff go here
+  </p>
 </div>

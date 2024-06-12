@@ -36,17 +36,17 @@ public class CoursesController {
     }
 
     @PostMapping("/university/{universityId}/professor/{professorId}")
-    public ResponseEntity<Course> create(@RequestBody CourseDto courseDto, @PathVariable final Integer universityId, final Integer professorId){
+    public ResponseEntity<Course> create(@RequestBody CourseDto courseDto, @PathVariable final Integer universityId, @PathVariable final Integer professorId){
         return new ResponseEntity<Course>(courseService.create(courseDto, universityId, professorId), HttpStatus.CREATED);
     }
 
     @PostMapping("/{courseId}/professor/{professorId}")
-    public ResponseEntity<Course> addProfessor(@PathVariable final Integer courseId, final Integer professorId){
+    public ResponseEntity<Course> addProfessor(@PathVariable final Integer courseId, @PathVariable final Integer professorId){
         return new ResponseEntity<Course>(courseService.addProfessor(courseId, professorId), HttpStatus.OK);
     }
 
     @PostMapping("/{courseId}/user/{userId}")
-    public ResponseEntity<Course> addUser(@PathVariable final Integer courseId, final Integer userId){
+    public ResponseEntity<Course> addUser(@PathVariable final Integer courseId, @PathVariable final Integer userId){
         return new ResponseEntity<Course>(courseService.addUser(courseId, userId), HttpStatus.OK);
     }
 
@@ -56,13 +56,13 @@ public class CoursesController {
     }
 
     @DeleteMapping("/{courseId}/professor/{professorId}")
-    public ResponseEntity<HttpStatus> removeProfessor(@PathVariable final Integer courseId, final Integer professorId){
+    public ResponseEntity<HttpStatus> removeProfessor(@PathVariable final Integer courseId, @PathVariable final Integer professorId){
         courseService.removeProfessor(courseId, professorId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{courseId}/user/{userId}")
-    public ResponseEntity<HttpStatus> removeUser(@PathVariable final Integer courseId, final Integer userId){
+    public ResponseEntity<HttpStatus> removeUser(@PathVariable final Integer courseId, @PathVariable final Integer userId){
         courseService.removeUser(courseId, userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
