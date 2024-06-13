@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1 style="display: flex; justify-content: center">Create University</h1>
+      <h1 style="display: flex; justify-content: center">
+        Edit University {{ university?.name }}
+      </h1>
     </div>
   </div>
   <p-divider></p-divider>
@@ -16,7 +18,7 @@
             style="width: 20rem"
             type="text"
             pInputText
-            [(ngModel)]="university.name"
+            [(ngModel)]="editedUniversity.name"
             name="Name"
           />
         </div>

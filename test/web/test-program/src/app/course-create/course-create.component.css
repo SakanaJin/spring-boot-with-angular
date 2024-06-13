@@ -1,3 +1,12 @@
 :host ::ng-deep .p-dropdown {
   width: 14rem;
+  margin-left: 0em;
+}
+
+:host ::ng-deep .p-dropdown-items-wrapper {
+  width: 14rem;
+}
+
+.panel {
+  margin-left: 0em !important;
 }

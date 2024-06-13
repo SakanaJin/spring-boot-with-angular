@@ -51,6 +51,10 @@ export class UniversityComponent implements OnInit {
     this.router.navigate([`course/${id}`]);
   }
 
+  toUniversityEdit() {
+    this.router.navigate([`/university/${this.university?.id}/edit`]);
+  }
+
   confirm(id: number) {
     this.confimationService.confirm({
       message: 'Are you sure you want to delete this Course?',

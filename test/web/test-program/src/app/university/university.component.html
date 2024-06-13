@@ -5,15 +5,33 @@
 ></p-confirmDialog>
 <div style="display: flex; align-items: center; justify-content: space-between">
   <h1>{{ university?.name }}</h1>
-  <button
-    pButton
-    pRipple
-    icon="pi pi-plus"
-    iconPos="right"
-    type="button"
-    label="Create"
-    (click)="toCourseCreate()"
-  ></button>
+  <div>
+    <div>
+      <button
+        style="width: 7rem"
+        pButton
+        pRipple
+        icon="pi pi-plus"
+        iconPos="right"
+        type="button"
+        label="Create"
+        (click)="toCourseCreate()"
+      ></button>
+    </div>
+    <div>
+      <button
+        style="width: 7rem"
+        pButton
+        pRipple
+        icon="pi pi-pencil"
+        iconPos="right"
+        type="button"
+        label="Edit"
+        class="p-button-warning"
+        (click)="toUniversityEdit()"
+      ></button>
+    </div>
+  </div>
 </div>
 <div class="container-fluid">
   <p-divider></p-divider>

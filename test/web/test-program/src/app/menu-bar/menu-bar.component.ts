@@ -19,6 +19,11 @@ export class MenuBarComponent {
         icon: 'pi pi-search',
         routerLink: '/find/universities',
       },
+      {
+        label: 'Professors',
+        icon: 'pi pi-users',
+        routerLink: '/professors',
+      },
     ];
   }
 }

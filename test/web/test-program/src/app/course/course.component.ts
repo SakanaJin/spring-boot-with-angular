@@ -31,4 +31,8 @@ export class CourseComponent implements OnInit {
   toCourseEdit() {
     this.router.navigate([`/course/${this.course?.id}/edit`]);
   }
+
+  toUniversity() {
+    this.router.navigate([`/university/${this.course?.university.id}`]);
+  }
 }

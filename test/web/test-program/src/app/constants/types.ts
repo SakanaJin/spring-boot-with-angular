@@ -2,7 +2,7 @@ export type CourseGetDto = {
   id: number;
   name: string;
   description: string;
-  universityId: number;
+  university: UniversityGetDto;
   professors: CourseProfessorsGetDto[];
   users: CourseUsersGetDto[];
 };

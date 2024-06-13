@@ -1,17 +1,17 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
+<div>
+  <div>
+    <div>
       <h1 style="display: flex; justify-content: center">Create Course</h1>
     </div>
   </div>
   <p-divider></p-divider>
   <div style="display: flex; justify-content: center">
-    <div class="row">
+    <div style="display: flex; justify-content: center">
       <form (submit)="onSubmit()">
         <div class="col">
           <label>Name</label>
         </div>
-        <div class="col-3">
+        <div>
           <input
             type="text"
             pInputText
@@ -20,10 +20,10 @@
             style="width: 14rem"
           />
         </div>
-        <div class="col">
+        <div>
           <label>Description</label>
         </div>
-        <div class="col-3">
+        <div>
           <input
             type="text"
             pInputText
@@ -32,11 +32,13 @@
             style="width: 14rem"
           />
         </div>
-        <div class="col">
+        <div>
           <label>Professor</label>
         </div>
-        <div class="col">
+        <div>
           <p-dropdown
+            panelStyleClass="panel"
+            appendTo="body"
             [options]="(professors | async)!"
             [(ngModel)]="selectedProfessorId"
             optionLabel="name"
@@ -46,7 +48,10 @@
             name="boxdropperboxerdrop"
           ></p-dropdown>
         </div>
-        <div class="col" style="display: flex; justify-content: space-between">
+        <div
+          class="col"
+          style="display: flex; justify-content: space-between; width: 14rem"
+        >
           <button pButton pRipple type="submit" label="Submit"></button>
           <button
             pButton

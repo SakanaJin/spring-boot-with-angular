@@ -10,15 +10,32 @@
     </div>
   </div>
   <div>
-    <button
-      pButton
-      pRipple
-      type="button"
-      icon="pi pi-pencil"
-      iconPos="right"
-      label="Edit"
-      (click)="toCourseEdit()"
-    ></button>
+    <div>
+      <button
+        pButton
+        pRipple
+        style="width: 7rem"
+        class="p-button-warning"
+        type="button"
+        icon="pi pi-pencil"
+        iconPos="right"
+        label="Edit"
+        (click)="toCourseEdit()"
+      ></button>
+    </div>
+    <div>
+      <button
+        pButton
+        pRipple
+        style="width: 7rem"
+        class="p-button-danger"
+        type="button"
+        icon="pi pi-arrow-left"
+        iconPos="right"
+        label="Back"
+        (click)="toUniversity()"
+      ></button>
+    </div>
   </div>
 </div>
 <p-divider></p-divider>

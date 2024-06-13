@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   CourseDto,
   CourseGetDto,
+  ProfessorDto,
   ProfessorGetDto,
   UniversityDto,
   UniversityGetDto,
@@ -166,6 +167,50 @@ export class ApiService {
       .pipe(
         catchError((error) => {
           this.toast.showToast('error', 'Error', 'Error fetching Professors');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  getProfessor(id: number) {
+    return this.http
+      .get<ProfessorGetDto>(this.baseUrl + `/api/professors/${id}`)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error fetching Professor');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  postProfessor(professor: ProfessorDto) {
+    return this.http
+      .post<ProfessorGetDto>(this.baseUrl + `/api/professors`, professor)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error creating Professor');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  putProfessor(professor: ProfessorDto, id: number) {
+    return this.http
+      .put<ProfessorGetDto>(this.baseUrl + `/api/professors/${id}`, professor)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error updating Professor');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  deleteProfessor(id: number) {
+    return this.http
+      .delete<ProfessorGetDto>(this.baseUrl + `/api/professors/${id}`)
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error deleting professor');
           return this.handleError(error);
         })
       );
