@@ -76,3 +76,12 @@ export type CourseDto = {
 export type ProfessorDto = {
   name: string;
 };
+
+export type Quote = {
+  id: number;
+  quote: string;
+  character: string;
+  title: string;
+  esrb: string;
+  release: string;
+};

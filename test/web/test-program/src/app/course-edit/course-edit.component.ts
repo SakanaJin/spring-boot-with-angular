@@ -97,7 +97,6 @@ export class CourseEditComponent implements OnInit {
         this.selectedProfessorId || 0
       )
       .subscribe((data) => {
-        this.toaster.showToast('success', 'Success', 'Professor Added');
         this.api
           .getCourse(this.course?.id || 0)
           .subscribe((data) => (this.course = { ...data }));
@@ -106,7 +105,6 @@ export class CourseEditComponent implements OnInit {
 
   removeProfessor(id: number) {
     this.api.removeProfessor(this.course?.id || 0, id).subscribe((data) => {
-      this.toaster.showToast('success', 'Success', 'Professor Removed');
       this.api
         .getCourse(this.course?.id || 0)
         .subscribe((data) => (this.course = { ...data }));

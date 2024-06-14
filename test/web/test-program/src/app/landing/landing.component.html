@@ -1,3 +1,7 @@
 <div class="box">
-  <h2>There's Nothing Here Yet</h2>
+  <p *ngIf="quote !== undefined">
+    "{{ quote.quote }}"<br /><br /><i
+      >&emsp;- {{ quote.character }}: {{ quote.title }}</i
+    >
+  </p>
 </div>

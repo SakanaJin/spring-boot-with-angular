@@ -5,6 +5,7 @@ import {
   CourseGetDto,
   ProfessorDto,
   ProfessorGetDto,
+  Quote,
   UniversityDto,
   UniversityGetDto,
 } from '../constants/types';
@@ -211,6 +212,18 @@ export class ApiService {
       .pipe(
         catchError((error) => {
           this.toast.showToast('error', 'Error', 'Error deleting professor');
+          return this.handleError(error);
+        })
+      );
+  }
+
+  //fetches a random quote from persona via this api: https://www.ultima.rest/docs
+  getQuote() {
+    return this.http
+      .get<Quote>('https://www.ultima.rest/api/quote/game?title=persona')
+      .pipe(
+        catchError((error) => {
+          this.toast.showToast('error', 'Error', 'Error getting quote');
           return this.handleError(error);
         })
       );
