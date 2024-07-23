@@ -48,5 +48,11 @@
         </ng-template>
       </p-card>
     </div>
+    <div
+      *ngIf="(professors | async)?.length === 0"
+      style="display: flex; justify-content: center"
+    >
+      <h2>No Professors</h2>
+    </div>
   </div>
 </div>

@@ -3,7 +3,7 @@ import { ApiService } from '../service/api.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProfessorGetDto } from '../constants/types';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { CardModule } from 'primeng/card';
@@ -21,6 +21,7 @@ import { ToastService } from '../service/toast.service';
     DividerModule,
     CardModule,
     ConfirmDialogModule,
+    NgIf,
   ],
   templateUrl: './professors.component.html',
   styleUrl: './professors.component.css',
